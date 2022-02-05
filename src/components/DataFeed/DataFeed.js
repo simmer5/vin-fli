@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import LoadingDots from '../LoadingDots/LoadingDots.js'
 import { getPhotos } from '../../API/getPhotos.js'
 
 const DataFeed = () => {
@@ -6,7 +7,7 @@ const DataFeed = () => {
 	const [error, setError] = useState(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [items, setItems] = useState([])
-	const [favorits, setFavorits] = useState([])
+	const [favorit, setFavorit] = useState([])
 
 	// useEffect(() => {
 	// 	const loadPhotos = async () => {
@@ -19,11 +20,28 @@ const DataFeed = () => {
 
 	// 	loadPhotos()
 	// }, [page])
-	const showFavorits = () => {}
-	const handelClick = id => {
-		console.log('Paklikinau:', id)
-		setFavorits(prev => [...prev, items[id]])
-		console.log(favorits)
+
+	// const handelClick = idx => {
+	// 	console.log('Paklikinau:', idx)
+	// 	const clickedItem = items[idx]
+	// 	console.log('paklikintas itemas', clickedItem)
+	// 	const withUpdatedItem = items.map((item, id) =>
+	// 		id === idx ? { ...item, isFavorit: !item.isFavorit } : item
+	// 	)
+	// 	console.log('Itemai su pakeistu favoritu', withUpdatedItem)
+	// 	setItems(prev => [...prev, withUpdatedItem])
+	// }
+	const handelClick = idx => {
+		if (favorit.includes(idx) === true) {
+			console.log('Istrintas is favoritu: ', idx)
+			const deletedFavorit = favorit.filter(value => value !== idx)
+			setFavorit(prev => [...deletedFavorit])
+			// console.log('Favoritai po istrinimoo: ', favorit)
+		} else {
+			console.log('Pridetas prie favoritu: ', idx)
+			setFavorit(prev => [...prev, idx])
+			// console.log('Favoritai po proidejimo: ', favorit)
+		}
 	}
 
 	const testScroll = e => {
@@ -47,7 +65,12 @@ const DataFeed = () => {
 				result => {
 					setIsLoaded(true)
 					const newItems = result.photos.photo
-					setItems(prev => [...prev, ...newItems])
+					const updatedItems = newItems.map(item => ({
+						...item,
+						isFavorit: false,
+					}))
+
+					setItems(prev => [...prev, ...updatedItems])
 				},
 
 				error => {
@@ -60,10 +83,22 @@ const DataFeed = () => {
 		return () => window.removeEventListener('scroll', testScroll)
 	}, [page])
 
+	useEffect(() => {
+		let data = []
+		data = localStorage.getItem('favorits')
+		const favoritai = JSON.parse(data)
+		setFavorit(favoritai)
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('favorits', JSON.stringify(favorit))
+		console.log('Favoritai is use effecto: ', favorit)
+	})
+
 	if (error) {
 		return <div>Error: {error.message}</div>
 	} else if (!isLoaded) {
-		return <div>Loading...</div>
+		return <LoadingDots />
 	} else {
 		return (
 			<div
@@ -87,9 +122,11 @@ const DataFeed = () => {
 						}}
 					>
 						{i + 1}. {item.title}
+						<br />
+						Ar favoritas: {favorit.includes(i) ? <h1>Yes</h1> : <h1>No</h1>}
 					</div>
 				))}
-				{isLoaded ? <div>Loading...</div> : <div></div>}
+				{isLoaded ? <LoadingDots /> : <div></div>}
 			</div>
 		)
 	}
