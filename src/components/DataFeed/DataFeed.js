@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ImgCard from '../ImgCard/ImgCard'
 import LoadingDots from '../LoadingDots/LoadingDots.js'
 import { getPhotos } from '../../API/getPhotos.js'
 
@@ -101,33 +102,17 @@ const DataFeed = () => {
 		return <LoadingDots />
 	} else {
 		return (
-			<div
-				// onScroll={handleScroll}
-				style={{
-					background: 'green',
-					// height: '800px',
-					margin: '0 auto',
-					// overflow: 'auto',
-				}}
-			>
+			<>
 				{items.map((item, i) => (
-					<div
-						onClick={() => handelClick(i)}
-						key={item.id}
-						style={{
-							height: '50vh',
-							width: '30vw',
-							backgroundImage: `url("${item.url_z}")`,
-							margin: 3,
-						}}
-					>
-						{i + 1}. {item.title}
-						<br />
-						Ar favoritas: {favorit.includes(i) ? <h1>Yes</h1> : <h1>No</h1>}
-					</div>
+					<ImgCard
+						itemData={item}
+						handelClick={() => handelClick(i)}
+						favorit={favorit.includes(i)}
+					/>
 				))}
+
 				{isLoaded ? <LoadingDots /> : <div></div>}
-			</div>
+			</>
 		)
 	}
 }

@@ -1,6 +1,10 @@
 .loading {
 	display: flex;
 	transition: opacity 0.3s ease-in;
+	width: 100%;
+	margin: 1rem;
+	padding: 1rem;
+	justify-content: center;
 }
 
 .circle {

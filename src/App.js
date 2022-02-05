@@ -1,5 +1,6 @@
 import './App.css'
 import Data from './components/DataFeed/DataFeed'
+import HomePage from './layouts/HomePage/HomePage'
 
 function App() {
 	return (
@@ -7,7 +8,8 @@ function App() {
 			<header className='App-header'>
 				<div>Vinted task</div>
 				<div>
-					<Data />
+					{/* <Data /> */}
+					<HomePage />
 				</div>
 			</header>
 		</div>
