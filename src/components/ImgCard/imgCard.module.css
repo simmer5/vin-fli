@@ -1,27 +1,20 @@
-.card {
-	margin: 1rem;
-
-	flex-basis: 25%;
-	padding: '3rem';
-	background-repeat: 'no-repeat';
-	background-position: 'bottom center';
-	background-size: 'cover';
-	background-color: 'red';
-	border-radius: 15px;
-}
-
 .cardContent {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	visibility: collapse;
-	padding: 2rem;
+
 	border-radius: 15px;
 	background-color: rgba(37, 37, 37, 0.527);
 	height: 100%;
 }
 .card:hover .cardContent {
 	visibility: visible;
+}
+
+.title {
+	margin-top: 2rem;
+	font-size: 1rem;
 }
 .favBtn {
 	background-color: transparent;
@@ -31,17 +24,48 @@
 	cursor: pointer;
 	color: #ffffff;
 	font-family: Arial;
-	font-size: 28px;
+	font-size: 1rem;
 	padding: 14px 19px;
 	text-decoration: none;
 	font-weight: bold;
-}
-.favBtn:hover {
-	background-color: rgba(77, 77, 77, 0.466);
+	margin-bottom: 0.5rem;
+	margin-top: 1rem;
 }
 .customLine {
 	width: 10vw;
 	height: 3px;
 	background-color: rgb(255, 255, 255);
 	margin: 0;
+}
+.views {
+	margin: 0.5rem;
+	font-size: 1rem;
+}
+.favBtn:hover {
+	background-color: rgba(77, 77, 77, 0.466);
+}
+@media (min-width: 800px) {
+	.title {
+		margin-top: 5rem;
+		font-size: 2.5rem;
+	}
+	.favBtn {
+		background-color: transparent;
+		border-radius: 28px;
+		border: 1px solid #ffffff;
+		display: inline-block;
+		cursor: pointer;
+		color: #ffffff;
+		font-family: Arial;
+		font-size: 22px;
+		padding: 14px 19px;
+		text-decoration: none;
+		font-weight: bold;
+		margin-bottom: 2.5rem;
+		margin-top: 3rem;
+	}
+	.views {
+		margin: 1rem;
+		font-size: 1.5rem;
+	}
 }
