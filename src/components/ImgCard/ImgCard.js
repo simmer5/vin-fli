@@ -2,10 +2,8 @@ import React from 'react'
 
 import styles from './imgCard.module.css'
 
-const ImgCard = ({ itemData, favorit, handelClick, innerWidth }) => {
+const ImgCard = ({ itemData, favorit, handelClick }) => {
 	const { title, views, url_z } = itemData
-
-	console.log('logas is imgCard innerWidth :', innerWidth)
 
 	const cardStyle = {
 		backgroundImage: `url("${url_z}")`,
@@ -13,6 +11,7 @@ const ImgCard = ({ itemData, favorit, handelClick, innerWidth }) => {
 		margin: '1rem',
 		borderRadius: '15px',
 		width: '30%',
+		height: '50vh',
 	}
 	return (
 		<div className={styles.card} style={cardStyle}>
