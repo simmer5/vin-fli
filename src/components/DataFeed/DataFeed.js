@@ -1,18 +1,34 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ImgCard from '../ImgCard/ImgCard'
 import LoadingDots from '../LoadingDots/LoadingDots.js'
 import useFetch from '../../hooks/useFetch'
+import styles from './dataFeed.module.css'
 
 const DataFeed = () => {
+	const myRef = useRef()
+
+	const [favorit, setFavorit] = useState([])
+	const [page, setPage] = useState(0)
+
 	const {
 		data: items,
 		error,
 		loading,
 	} = useFetch(
-		`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLI_KEY}&user_id=13980928%40N03&extras=owner_name%2C+o_dims%2C+views%2C+url_z%2C+&per_page=9&page=1&format=json&nojsoncallback=1`
+		`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLI_KEY}&user_id=13980928%40N03&extras=owner_name%2C+o_dims%2C+views%2C+url_z%2C+&per_page=9&page=${page}&format=json&nojsoncallback=1`
 	)
 
-	const [favorit, setFavorit] = useState([])
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			entries => {
+				const entry = entries[0]
+				console.log('Observeris ', entry)
+				setPage(prev => prev + 1)
+			},
+			{ threshold: 1 }
+		)
+		observer.observe(myRef.current)
+	}, [])
 
 	const handelClick = idx => {
 		if (favorit.includes(idx) === true) {
@@ -35,21 +51,8 @@ const DataFeed = () => {
 		localStorage.setItem('favorits', JSON.stringify(favorit))
 	}, [favorit])
 
-	if (error) <div>Error: {error.message}</div>
-	if (loading) <LoadingDots />
-
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexWrap: 'wrap',
-				flex: ' 1 1 23%',
-				margin: '1rem',
-				padding: '1rem',
-				maxWidth: '80%',
-				justifyContent: 'space-between',
-			}}
-		>
+		<div className={styles.gallery}>
 			{items.map((item, i) => (
 				<ImgCard
 					itemData={item}
@@ -58,8 +61,16 @@ const DataFeed = () => {
 					key={item.id}
 				/>
 			))}
+			<div
+				style={{ width: '100%', backgroundColor: 'red', alignSelf: 'end' }}
+				ref={myRef}
+			>
+				<LoadingDots />
+			</div>
 
-			{loading ? <LoadingDots /> : <div></div>}
+			{/* <div ref={myRef} style={{ width: '100%', backgroundColor: 'red' }}>
+				Ref div
+			</div> */}
 		</div>
 	)
 }

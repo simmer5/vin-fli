@@ -5,9 +5,7 @@ import DataFeed from '../../components/DataFeed/DataFeed'
 const HomePage = () => {
 	return (
 		<div className={styles.container}>
-			<div className={styles.cards}>
-				<DataFeed />
-			</div>
+			<DataFeed />
 		</div>
 	)
 }
