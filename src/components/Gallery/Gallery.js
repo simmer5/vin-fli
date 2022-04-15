@@ -27,6 +27,21 @@ const DataFeed = () => {
 		observer.observe(myRef.current)
 	}, [])
 
+	useEffect(() => {
+		let data = localStorage.getItem('favorits')
+		if (data !== null) {
+			const favoritai = JSON.parse(data)
+			setFavorit(favoritai)
+		}
+		if (data === 'null') {
+			localStorage.setItem('favorits', '')
+		}
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('favorits', JSON.stringify(favorit))
+	}, [favorit])
+
 	const handelClick = idx => {
 		if (favorit.includes(idx) === true) {
 			const deletedFavorit = favorit.filter(value => value !== idx)
@@ -35,16 +50,6 @@ const DataFeed = () => {
 			setFavorit(prev => [...prev, idx])
 		}
 	}
-
-	useEffect(() => {
-		const data = localStorage.getItem('favorits')
-		const favoritai = JSON.parse(data)
-		setFavorit(favoritai)
-	}, [])
-
-	useEffect(() => {
-		localStorage.setItem('favorits', JSON.stringify(favorit))
-	}, [favorit])
 
 	return (
 		<div className={styles.gallery}>

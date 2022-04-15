@@ -19,7 +19,7 @@ const ImgCard = ({ itemData, favorit, handelClick }) => {
 					{views}
 				</p>
 				<div className={styles.favBtn} onClick={handelClick}>
-					{favorit ? <span>Favourite</span> : <span>Add to favourite</span>}
+					{favorit ? <span>Favorite</span> : <span>Add to favorite</span>}
 				</div>
 			</div>
 		</div>
