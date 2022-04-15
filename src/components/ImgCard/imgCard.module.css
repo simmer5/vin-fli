@@ -39,7 +39,7 @@ img {
 }
 
 .title {
-	font-size: 1.5rem;
+	font-size: 1rem;
 }
 .favBtn {
 	background-color: transparent;
@@ -72,5 +72,8 @@ img {
 @media (min-width: 800px) {
 	.galleryItem {
 		flex: 1 0 24rem;
+	}
+	.title {
+		font-size: 1.5rem;
 	}
 }
