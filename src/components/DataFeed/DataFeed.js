@@ -8,13 +8,9 @@ const DataFeed = () => {
 	const myRef = useRef()
 
 	const [favorit, setFavorit] = useState([])
-	const [page, setPage] = useState(0)
+	const [page, setPage] = useState(1)
 
-	const {
-		data: items,
-		error,
-		loading,
-	} = useFetch(
+	const { data: items } = useFetch(
 		`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLI_KEY}&user_id=13980928%40N03&extras=owner_name%2C+o_dims%2C+views%2C+url_z%2C+&per_page=9&page=${page}&format=json&nojsoncallback=1`
 	)
 
@@ -22,8 +18,9 @@ const DataFeed = () => {
 		const observer = new IntersectionObserver(
 			entries => {
 				const entry = entries[0]
-				console.log('Observeris ', entry)
-				setPage(prev => prev + 1)
+				if (entry.isIntersecting) {
+					setPage(prev => prev + 1)
+				}
 			},
 			{ threshold: 1 }
 		)
@@ -42,8 +39,6 @@ const DataFeed = () => {
 	useEffect(() => {
 		const data = localStorage.getItem('favorits')
 		const favoritai = JSON.parse(data)
-		console.log('Cia favoritai ', data)
-		console.log('Cia type of favoritai ', typeof favoritai)
 		setFavorit(favoritai)
 	}, [])
 
@@ -61,16 +56,9 @@ const DataFeed = () => {
 					key={item.id}
 				/>
 			))}
-			<div
-				style={{ width: '100%', backgroundColor: 'red', alignSelf: 'end' }}
-				ref={myRef}
-			>
+			<div style={{ width: '100%', alignSelf: 'end' }} ref={myRef}>
 				<LoadingDots />
 			</div>
-
-			{/* <div ref={myRef} style={{ width: '100%', backgroundColor: 'red' }}>
-				Ref div
-			</div> */}
 		</div>
 	)
 }

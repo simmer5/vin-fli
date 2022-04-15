@@ -16,7 +16,7 @@ const useFetch = url => {
 			.finally(() => setLoading(false))
 	}, [url])
 
-	return { data, loading, error }
+	return { data, loading, error, setLoading }
 }
 
 export default useFetch

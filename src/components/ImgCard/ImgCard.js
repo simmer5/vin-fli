@@ -7,7 +7,7 @@ const ImgCard = ({ itemData, favorit, handelClick }) => {
 
 	return (
 		<div className={styles.galleryItem}>
-			<img src={url_z} alt='Alt cia' />
+			<img src={url_z} alt={title} />
 			<div className={styles.cardContent}>
 				<h3 className={styles.title}>{title}</h3>
 				<div>
