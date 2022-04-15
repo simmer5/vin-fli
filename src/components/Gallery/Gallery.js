@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import ImgCard from '../ImgCard/ImgCard'
 import LoadingDots from '../LoadingDots/LoadingDots.js'
 import useFetch from '../../hooks/useFetch'
-import styles from './dataFeed.module.css'
+import styles from './gallery.module.css'
 
 const DataFeed = () => {
 	const myRef = useRef()

@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './homePage.module.css'
-import DataFeed from '../../components/DataFeed/DataFeed'
+import Gallery from '../../components/Gallery/Gallery'
 
 const HomePage = () => {
 	return (
 		<div className={styles.container}>
-			<DataFeed />
+			<Gallery />
 		</div>
 	)
 }
