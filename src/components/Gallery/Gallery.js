@@ -29,13 +29,12 @@ const DataFeed = () => {
 
 	useEffect(() => {
 		let data = localStorage.getItem('favorits')
-		if (data !== null) {
-			const favoritai = JSON.parse(data)
-			setFavorit(favoritai)
+		if (data !== 'null' || data !== null) {
+			console.log('1. logas localstorage', data)
+			return
 		}
-		if (data === 'null') {
-			localStorage.setItem('favorits', '')
-		}
+		const favoritai = JSON.parse(data)
+		setFavorit(favoritai)
 	}, [])
 
 	useEffect(() => {
