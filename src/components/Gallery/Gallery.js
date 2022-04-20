@@ -6,11 +6,10 @@ import styles from './gallery.module.css'
 
 const DataFeed = () => {
 	const myRef = useRef()
-
 	const [favorit, setFavorit] = useState([])
 	const [page, setPage] = useState(1)
 
-	const { data: items } = useFetch(
+	const { data: items, loading } = useFetch(
 		`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLI_KEY}&user_id=13980928%40N03&extras=owner_name%2C+o_dims%2C+views%2C+url_z%2C+&per_page=9&page=${page}&format=json&nojsoncallback=1`
 	)
 
@@ -31,14 +30,14 @@ const DataFeed = () => {
 		let data = localStorage.getItem('favorits')
 		if (data !== 'null' || data !== null) {
 			console.log('1. logas localstorage', data)
-			return
+			const favoritai = JSON.parse(data)
+			setFavorit(favoritai)
 		}
-		const favoritai = JSON.parse(data)
-		setFavorit(favoritai)
 	}, [])
 
 	useEffect(() => {
 		localStorage.setItem('favorits', JSON.stringify(favorit))
+		console.log('Lgas is useEffect favorits', favorit)
 	}, [favorit])
 
 	const handelClick = idx => {
@@ -52,6 +51,13 @@ const DataFeed = () => {
 
 	return (
 		<div className={styles.gallery}>
+			{loading ? (
+				<div style={{ margin: '0 auto' }}>
+					<LoadingDots />{' '}
+				</div>
+			) : (
+				<></>
+			)}
 			{items.map((item, i) => (
 				<ImgCard
 					itemData={item}
