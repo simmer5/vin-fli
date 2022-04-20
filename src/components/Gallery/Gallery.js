@@ -34,7 +34,7 @@ const DataFeed = () => {
 			setFavorit(favoritai)
 			return
 		}
-		setFavorit([])
+		// setFavorit([])
 		console.log('Logas is favoritu ir favorit po if ', favorit)
 	}, [])
 
