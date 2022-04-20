@@ -32,6 +32,7 @@ const DataFeed = () => {
 			console.log('1. logas localstorage', data)
 			const favoritai = JSON.parse(data)
 			setFavorit(favoritai)
+			return
 		}
 	}, [])
 
