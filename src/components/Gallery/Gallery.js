@@ -21,7 +21,7 @@ const DataFeed = () => {
 					setPage(prev => prev + 1)
 				}
 			},
-			{ threshold: 1 }
+			{ threshold: 0.5 }
 		)
 		observer.observe(myRef.current)
 	}, [])
@@ -29,18 +29,13 @@ const DataFeed = () => {
 	useEffect(() => {
 		let data = localStorage.getItem('favorits')
 		if (data !== 'null' && data !== null) {
-			console.log('1. logas localstorage', data)
 			const favoritai = JSON.parse(data)
 			setFavorit(favoritai)
-			// return
 		}
-		// setFavorit([])
-		console.log('2. Logas is favoritu ir favorit po if ', favorit)
 	}, [])
 
 	useEffect(() => {
 		localStorage.setItem('favorits', JSON.stringify(favorit))
-		console.log('Lgas is useEffect favorits', favorit)
 	}, [favorit])
 
 	const handelClick = idx => {
