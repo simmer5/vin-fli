@@ -66,8 +66,7 @@ img {
 	margin: 0.5rem;
 	font-size: 1rem;
 }
-.favBtn:hover,
-.favBtn:active {
+.favBtn:hover {
 	background-color: rgba(77, 77, 77, 0.466);
 }
 @media (min-width: 800px) {
