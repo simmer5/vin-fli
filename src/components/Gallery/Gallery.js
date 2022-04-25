@@ -4,7 +4,7 @@ import LoadingDots from '../LoadingDots/LoadingDots.js'
 import useFetch from '../../hooks/useFetch'
 import styles from './gallery.module.css'
 
-const DataFeed = () => {
+const Gallery = () => {
 	const myRef = useRef()
 	const [favorit, setFavorit] = useState([])
 	const [page, setPage] = useState(1)
@@ -71,4 +71,4 @@ const DataFeed = () => {
 	)
 }
 
-export default DataFeed
+export default Gallery
